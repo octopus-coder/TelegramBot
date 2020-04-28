@@ -4,6 +4,8 @@ PokeBot gives you Pokemon Quizzes:
 
 It displays a picture of random pokemon from 721 available pokemons and gives you 4 random names to guess the pokemon.
 
+PokeBot is live, in Telegram search for LuisenBot and you can interact with him.
+
 ## Desktop Version
 <img src="https://github.com/octopus-coder/TelegramBot/blob/master/telegram_desktop_pokebot.png" width="400" height="600" />
 
