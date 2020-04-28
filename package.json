@@ -1,0 +1,22 @@
+{
+  "name": "TelegramBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "dev": "nodemon bot.js",
+    "start": "node bot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "telegraf": "^3.37.0",
+    "telegraf-wit": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
