@@ -5,7 +5,8 @@
   "main": "bot.js",
   "scripts": {
     "dev": "nodemon bot.js",
-    "start": "node bot.js"
+    "start": "node bot.js",
+    "build": "node bot.js"
   },
   "keywords": [],
   "author": "",
