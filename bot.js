@@ -22,6 +22,8 @@ Bot.command('joke', ctx => {
       punchline = response.data[0].punchline;
       await Bot.telegram.sendMessage(ctx.message.chat.id, setup);
       await Bot.telegram.sendMessage(ctx.message.chat.id, `${punchline} 🤣🤣🤣`);
+    }).catch(async (e) => {
+      await Bot.telegram.sendMessage(ctx.message.chat.id, 'Something went wrong! 😰');
     });
 });
 
@@ -51,7 +53,7 @@ Bot.command('pokemon', async ctx => {
       axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_id_3}/`),
       axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_id_4}/`),
     ]).catch(async (e) => {
-        await Bot.telegram.sendMessage(ctx.message.chat.id, 'Something went wrong! 😰');
+      await Bot.telegram.sendMessage(ctx.message.chat.id, 'Something went wrong! 😰');
     });
     const pokemon_names = [pokemon_1.data.name, pokemon_2.data.name, pokemon_3.data.name, pokemon_4.data.name];
     const shuffled_names = random_shuffle(pokemon_names);
