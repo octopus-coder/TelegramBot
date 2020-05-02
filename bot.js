@@ -9,7 +9,7 @@ const WIT_TOKEN = process.env.WIT_TOKEN;
 const Bot = new Telegraf(BOT_TOKEN);
 const wit = new TelegrafWit(WIT_TOKEN);
 const CONFIDENCE_THRESHOLD = 0.9;
-const TOTAL_POKEMONS = 721;
+const TOTAL_POKEMONS = 807;
 
 Bot.start((ctx) => {
   ctx.reply(`Welcome ${ctx.from.first_name}! type /joke for a good joke! 😁 or /pokemon to test your poke skills! 😎`);
@@ -40,13 +40,19 @@ const random_shuffle = (array) => {
   return temp_array;
 }
 
+const zero_padding = (number) => {
+  if(number >= 100) return number;
+  if(number >= 10) return '0' + number;
+  return '00' + number;
+}
+
 Bot.command('pokemon', async ctx => {
   try {
     await Bot.telegram.sendMessage(ctx.message.chat.id, 'Who is this Pokemon!? 😱');
-    const pokemon_id_1 = Math.floor(Math.random() * TOTAL_POKEMONS);
-    const pokemon_id_2 = Math.floor(Math.random() * TOTAL_POKEMONS);
-    const pokemon_id_3 = Math.floor(Math.random() * TOTAL_POKEMONS);
-    const pokemon_id_4 = Math.floor(Math.random() * TOTAL_POKEMONS);
+    const pokemon_id_1 = Math.floor(Math.random() * (TOTAL_POKEMONS - 1)) + 1;
+    const pokemon_id_2 = Math.floor(Math.random() * (TOTAL_POKEMONS - 1)) + 1;
+    const pokemon_id_3 = Math.floor(Math.random() * (TOTAL_POKEMONS - 1)) + 1;
+    const pokemon_id_4 = Math.floor(Math.random() * (TOTAL_POKEMONS - 1)) + 1;
     var [pokemon_1, pokemon_2, pokemon_3, pokemon_4] = await Promise.all([
       axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_id_1}/`),
       axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon_id_2}/`),
@@ -60,12 +66,13 @@ Bot.command('pokemon', async ctx => {
     const index = shuffled_names.findIndex(pokemon => {
       return pokemon === pokemon_names[0];
     });
-    ctx.replyWithPhoto(`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon_id_1}.png`,
+
+    ctx.replyWithPhoto(`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${zero_padding(pokemon_id_1)}.png`,
       Markup.inlineKeyboard([
         [Markup.callbackButton(shuffled_names[0], index === 0 ? 'correct' : 'incorrect'),
-        Markup.callbackButton(shuffled_names[1], index === 1 ? 'correct' : 'incorrect')],
+         Markup.callbackButton(shuffled_names[1], index === 1 ? 'correct' : 'incorrect')],
         [Markup.callbackButton(shuffled_names[2], index === 2 ? 'correct' : 'incorrect'),
-        Markup.callbackButton(shuffled_names[3], index === 3 ? 'correct' : 'incorrect')]
+         Markup.callbackButton(shuffled_names[3], index === 3 ? 'correct' : 'incorrect')]
       ]).extra()
     )
   }
