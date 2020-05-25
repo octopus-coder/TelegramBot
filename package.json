@@ -1,11 +1,11 @@
 {
-  "name": "TelegramBot",
+  "name": "telegrambot",
   "version": "1.0.0",
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
-    "build": "node bot.js"
+    "start": "forever start --minUptime 1000 --spinSleepTime 1000 bot.js",
+    "stop": "forever stop app.js"
   },
   "keywords": [],
   "author": "",
